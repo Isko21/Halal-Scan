@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "957559533289",
+    "project_id": "halal-scan-91706",
+    "storage_bucket": "halal-scan-91706.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957559533289:android:ced4f3ea7dcdffe79c8a78",
+        "android_client_info": {
+          "package_name": "io.isko.halalscan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957559533289-n4qam4rn8j24kkof1apidhk453bb7em2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_eQCr4tnHys4Pmg6B3oA9zoXxP09KIIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957559533289-n4qam4rn8j24kkof1apidhk453bb7em2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

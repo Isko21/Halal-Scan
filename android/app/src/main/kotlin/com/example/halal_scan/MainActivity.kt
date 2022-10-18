@@ -1,4 +1,4 @@
-package com.example.halal_scan
+package io.isko.halalscan
 
 import io.flutter.embedding.android.FlutterActivity
 
