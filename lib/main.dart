@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halal_scan/utility/wrapper.dart';
 import 'package:halal_scan/utility/config.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -23,15 +24,13 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const MainPage(title: 'Halal Scan'),
+      home: const Wrapper(),
     );
   }
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
