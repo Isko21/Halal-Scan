@@ -44,17 +44,15 @@ android {
     }
 
     defaultConfig {
-        applicationId "io.isko.halalscan"
-        minSdkVersion 29
-        targetSdkVersion 31
+        applicationId "io.isko.halal_scan"
+        minSdkVersion 21
+        targetSdkVersion 32
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
     }
