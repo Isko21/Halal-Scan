@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "957559533289",
+    "project_id": "halal-scan-91706",
+    "storage_bucket": "halal-scan-91706.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957559533289:android:9a29c760b0570e6b9c8a78",
+        "android_client_info": {
+          "package_name": "io.isko.halal_scan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957559533289-ra010okeosmlhnusocgr7bab5tacarku.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.isko.halal_scan",
+            "certificate_hash": "279a9fc34616d7bc9b421301bfac330e625297bd"
+          }
+        },
+        {
+          "client_id": "957559533289-n4qam4rn8j24kkof1apidhk453bb7em2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_eQCr4tnHys4Pmg6B3oA9zoXxP09KIIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957559533289-n4qam4rn8j24kkof1apidhk453bb7em2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "957559533289-6181eldm3bsg7u05m3gjcvda2j254cvk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.halalScan"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
