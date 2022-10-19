@@ -1,6 +1,6 @@
-# halal_scan
+# Halal Scan
 
-A new Flutter project.
+An app to help you check if your everyday products are halal or not.
 
 ## Getting Started
 
