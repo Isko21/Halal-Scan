@@ -1,10 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halal_scan/utility/wrapper.dart';
 import 'package:halal_scan/utility/config.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+import 'firebase_options.dart';
+import 'utility/auth.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -13,18 +20,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Halal Scan',
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
-        textTheme: GoogleFonts.fredokaTextTheme(
-          const TextTheme(
-            headline1: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+    return ChangeNotifierProvider(
+      create: (BuildContext c) => GoogleSignInProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Halal Scan',
+        theme: ThemeData(
+          primarySwatch: Colors.cyan,
+          textTheme: GoogleFonts.fredokaTextTheme(
+            const TextTheme(
+              headline1: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
+        home: const Wrapper(),
       ),
-      home: const Wrapper(),
     );
   }
 }
@@ -37,7 +47,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final _controller = PersistentTabController(initialIndex: 2);
+  final _controller = PersistentTabController(initialIndex: 0);
 
   @override
   Widget build(BuildContext context) {
