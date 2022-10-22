@@ -8,10 +8,11 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Center(
-          child: Text(
-        title,
-        style: Theme.of(context).textTheme.headline1,
-      )),
+        child: Text(
+          title,
+          style: Theme.of(context).textTheme.headline1,
+        ),
+      ),
     );
   }
 
