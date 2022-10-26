@@ -44,7 +44,7 @@ List<PersistentBottomNavBarItem> navBarsItems() {
   ];
 }
 
-List<Widget> navBarscreens() {
+List<Widget> navBarScreens() {
   return [
     const HomePage(),
     const SearchPage(),
