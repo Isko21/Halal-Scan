@@ -15,31 +15,42 @@ class ProductDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: ProductDetailsAppBar(status: status),
-      body: Stack(alignment: AlignmentDirectional.topCenter, children: [
-        Column(
-          children: [
-            Container(
-              height: 150,
-              color: getHalalColor(status),
-            )
-          ],
-        ),
-        SizedBox(
-          height: 200,
-          width: 300,
-          child: Card(
-              child: Row(
+      body: Stack(
+        alignment: AlignmentDirectional.topCenter,
+        children: [
+          Column(
             children: [
-              Image.network(
-                url,
-              ),
-              Text(title)
+              Container(
+                height: 150,
+                color: getHalalColor(status),
+              )
             ],
-          )),
-        ),
-      ]),
+          ),
+          Container(
+            padding: const EdgeInsets.all(20),
+            width: size.width,
+            height: size.height / 3.5,
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [ 
+                    Image(image: NetworkImage(url)),
+                    const SizedBox(width: 20),
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.displayLarge,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
