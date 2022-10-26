@@ -54,7 +54,7 @@ class _MainPageState extends State<MainPage> {
     return PersistentTabView(
       context,
       controller: _controller,
-      screens: navBarscreens(),
+      screens: navBarScreens(),
       items: navBarsItems(),
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
