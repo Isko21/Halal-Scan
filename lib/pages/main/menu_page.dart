@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:halal_scan/models/config.dart';
 import 'package:halal_scan/widgets/appbar.dart';
 
 class MenuPage extends StatefulWidget {
@@ -12,7 +13,10 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: CustomAppBar(title: 'Menu'),
+      appBar: MainAppBar(
+        title: 'MENU',
+        name: CustomPageName.menu,
+      ),
     );
   }
 }

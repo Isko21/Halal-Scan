@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:halal_scan/main.dart';
-import 'package:halal_scan/pages/welcome/signin.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
@@ -17,7 +16,7 @@ class Wrapper extends StatelessWidget {
           } else if (snapshot.hasData) {
             return const MainPage();
           }
-          return const AuthenticatePage();
+          return const MainPage();
         },
       ),
     );

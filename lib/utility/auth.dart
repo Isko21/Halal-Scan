@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import '../models/user.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -8,6 +11,18 @@ class GoogleSignInProvider extends ChangeNotifier {
   late GoogleSignInAccount? _user;
 
   GoogleSignInAccount get user => _user!;
+
+  CustomUser? userConverter(GoogleSignInAccount? googleUser) {
+    return googleUser != null
+        ? CustomUser(
+            uid: googleUser.id,
+            fullName: googleUser.displayName!,
+            photoUrl: googleUser.photoUrl!,
+            isReviewer: false,
+            memberSince: Timestamp.now(),
+          )
+        : null;
+  }
 
   Future<void> googleLogIn() async {
     try {
@@ -28,7 +43,7 @@ class GoogleSignInProvider extends ChangeNotifier {
     } on Exception {
       rethrow;
     }
-
+    userConverter(_user);
     notifyListeners();
   }
 
