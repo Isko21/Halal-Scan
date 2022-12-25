@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>957559533289-6181eldm3bsg7u05m3gjcvda2j254cvk.apps.googleusercontent.com</string>
+	<string>175847291599-1nvi47f46q00d4dqlm6odrv2geuatv8q.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.957559533289-6181eldm3bsg7u05m3gjcvda2j254cvk</string>
+	<string>com.googleusercontent.apps.175847291599-1nvi47f46q00d4dqlm6odrv2geuatv8q</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>175847291599-7dpjhf87enk7me1ot3h5gaft4a3jmg2f.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBkzTTjWJqBfkS8_GqBmbT5ZkMxyomKvgg</string>
+	<string>AIzaSyAT_AjjIkqUy5eWpP7VL0X7qNligAxY-TE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>957559533289</string>
+	<string>175847291599</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.halalScan</string>
+	<string>io.isko.dailymuslim</string>
 	<key>PROJECT_ID</key>
-	<string>halal-scan-91706</string>
+	<string>daily-muslim-plus</string>
 	<key>STORAGE_BUCKET</key>
-	<string>halal-scan-91706.appspot.com</string>
+	<string>daily-muslim-plus.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:957559533289:ios:331e01d3ea0d3c389c8a78</string>
+	<string>1:175847291599:ios:02643a346549ae836815ba</string>
 </dict>
 </plist>

@@ -1,56 +1,44 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:halal_scan/models/user.dart';
 
-class GoogleSignInProvider extends ChangeNotifier {
-  final GoogleSignIn googleSignIn = GoogleSignIn();
+class AuthService extends ChangeNotifier {
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  late GoogleSignInAccount? _user;
-
-  GoogleSignInAccount get user => _user!;
-
-  Future<void> googleLogIn() async {
-    try {
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
-      if (googleUser == null) {
-        return;
-      }
-      _user = googleUser;
-
-      final GoogleSignInAuthentication googlAuth =
-          await googleUser.authentication;
-
-      final OAuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googlAuth.accessToken,
-        idToken: googlAuth.idToken,
-      );
-      await FirebaseAuth.instance.signInWithCredential(credential);
-    } on Exception {
-      rethrow;
-    }
-
-    notifyListeners();
+  CustomUser? customUserFromFirebase(User? user) {
+    return user != null
+        ? CustomUser(
+            uid: user.uid,
+            fullName: user.displayName,
+            photoUrl: user.photoURL,
+            email: user.email,
+          )
+        : null;
   }
 
-  Future<void> logOut() async {
-    await googleSignIn.disconnect();
-    await FirebaseAuth.instance.signOut();
+  Stream<CustomUser?> get authUser {
+    return firebaseAuth.authStateChanges().map(customUserFromFirebase);
   }
-}
 
-class AnonymousSignInProvider extends ChangeNotifier {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-
-  Future<User?> signIn() async {
+  Future signUp(String email, String password) async {
     try {
-      final UserCredential result = await auth.signInAnonymously();
-      final User user = result.user!;
-      return user;
-    } on Exception {
-      rethrow;
+      UserCredential userCredential = await firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      User? user = userCredential.user;
+
+      return customUserFromFirebase(user);
+    } catch (e) {
+      print(e.toString());
+      return null;
     }
   }
 
-  @override
-  void notifyListeners();
+  Future signOut() async {
+    try {
+      return await firebaseAuth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
 }

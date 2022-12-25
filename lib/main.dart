@@ -1,12 +1,17 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halal_scan/models/user.dart';
 import 'package:halal_scan/utility/wrapper.dart';
-import 'package:halal_scan/utility/config.dart';
+import 'package:halal_scan/models/config.dart';
+import 'package:material_color_generator/material_color_generator.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
+import 'generated/l10n.dart';
 import 'utility/auth.dart';
 
 void main() async {
@@ -20,18 +25,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext c) => GoogleSignInProvider(),
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+    return StreamProvider<CustomUser?>.value(
+      initialData:
+          CustomUser(fullName: 'Initial Data', email: 'test@gmail.com'),
+      value: AuthService().authUser,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Halal Scan',
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
         theme: ThemeData(
-          primarySwatch: Colors.cyan,
-          textTheme: GoogleFonts.fredokaTextTheme(
-            const TextTheme(
-              headline1: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
-            ),
-          ),
+          primarySwatch: generateMaterialColor(color: CustomColor.buttonColor),
+          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context)
+              .textTheme
+              .apply(
+                  bodyColor: CustomColor.darkBackColor,
+                  displayColor: CustomColor.darkBackColor)),
         ),
         home: const Wrapper(),
       ),
