@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halal_scan/models/config.dart';
-import 'package:halal_scan/models/reports/wrong_ingredients.dart';
-import 'package:halal_scan/models/reports/wrong_status.dart';
+import 'package:halal_scan/pages/submain/reports/wrong_ingredients.dart';
+import 'package:halal_scan/pages/submain/reports/wrong_status.dart';
 import 'package:halal_scan/pages/submain/notification_page.dart';
 import 'package:halal_scan/pages/submain/save_page.dart';
 import 'package:halal_scan/utility/common_functions.dart';
@@ -12,8 +12,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../models/reports/wrong_image.dart';
-import '../models/reports/wrong_name.dart';
+import '../pages/submain/reports/wrong_image.dart';
+import '../pages/submain/reports/wrong_name.dart';
 
 class MainAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;

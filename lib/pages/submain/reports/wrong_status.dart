@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import '../../utility/common_functions.dart';
-import '../../widgets/button.dart';
+import '../../../utility/common_functions.dart';
+import '../../../widgets/button.dart';
 
 class ReportWrongStatus extends StatelessWidget {
   const ReportWrongStatus({Key? key}) : super(key: key);
@@ -75,9 +75,10 @@ class ReportWrongStatus extends StatelessWidget {
             const SizedBox(height: 10),
             CustomElevatedButton(
               text: 'Send',
+              height: 45,
               onTap: () {},
             ),
-            const SizedBox(height: 20)
+            const SizedBox(height: 10),
           ],
         ),
       ),

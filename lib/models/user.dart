@@ -1,19 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CustomUser {
-  final String uid;
-  final String fullName;
-  final String photoUrl;
-  final bool isReviewer;
-  final Timestamp memberSince;
+  String? uid;
+  String? fullName;
+  String? email;
+  String? photoUrl;
+  bool? isReviewer;
+  Timestamp? memberSince;
 
   CustomUser({
-    required this.uid,
-    required this.fullName,
-    required this.photoUrl,
-    required this.isReviewer,
-    required this.memberSince,
+    this.uid,
+    this.fullName,
+    this.email,
+    this.photoUrl,
+    this.isReviewer = false,
+    this.memberSince,
   });
+
+  String? get getUID => uid;
+  String? get getFullName => fullName;
+  String? get getEmail => email;
+  String? get getPhotoUrl => photoUrl;
+  bool? get getIsReviewer => isReviewer;
+  Timestamp? get getTimeStamp => memberSince;
+
+  void setFullName(String val) {
+    fullName = val;
+  }
+
   Map<String, dynamic> toJson() => {
         'uid': uid,
         'fullName': fullName,

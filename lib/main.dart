@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halal_scan/models/user.dart';
 import 'package:halal_scan/utility/wrapper.dart';
 import 'package:halal_scan/models/config.dart';
 import 'package:material_color_generator/material_color_generator.dart';
@@ -23,8 +25,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext c) => GoogleSignInProvider(),
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+    return StreamProvider<CustomUser?>.value(
+      initialData:
+          CustomUser(fullName: 'Initial Data', email: 'test@gmail.com'),
+      value: AuthService().authUser,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Halal Scan',

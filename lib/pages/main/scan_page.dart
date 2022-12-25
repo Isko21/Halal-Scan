@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:halal_scan/models/config.dart';
+import 'package:halal_scan/pages/submain/product_doesnt_exists.dart';
 import 'package:halal_scan/utility/common_functions.dart';
 import 'package:halal_scan/widgets/appbar.dart';
 import 'package:lottie/lottie.dart';
@@ -37,6 +38,7 @@ class _ScanPageState extends State<ScanPage> {
   @override
   void dispose() {
     super.dispose();
+    controller!.pauseCamera();
     controller!.dispose();
   }
 
@@ -118,15 +120,13 @@ class _ScanPageState extends State<ScanPage> {
           barcodeScanRes = scanData.code;
         });
         showModalBottomSheet(
-          context: context,
-          builder: (context) => Container(
-            margin: const EdgeInsets.all(40),
-            child: Text(
-              scanData.code.toString(),
-              style: titleLarge(),
+            backgroundColor: Colors.white,
+            isScrollControlled: true,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
             ),
-          ),
-        );
+            context: context,
+            builder: (context) => const NoSuchProduct());
       },
     );
   }

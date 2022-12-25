@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../utility/common_functions.dart';
-import '../../widgets/button.dart';
-import '../config.dart';
+import '../../../utility/common_functions.dart';
+import '../../../widgets/button.dart';
+import '../../../models/config.dart';
 
 class ReportWrongName extends StatelessWidget {
   const ReportWrongName({
@@ -55,6 +55,7 @@ class ReportWrongName extends StatelessWidget {
           const SizedBox(height: 10),
           CustomElevatedButton(
             text: 'Send',
+            height: 45,
             onTap: () {},
           ),
           const SizedBox(height: 20)

@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../utility/common_functions.dart';
-import '../../widgets/button.dart';
-import '../config.dart';
+import '../../../utility/common_functions.dart';
+import '../../../widgets/button.dart';
+import '../../../models/config.dart';
 
-class ReportWrongImage extends StatelessWidget {
-  const ReportWrongImage({
+class ReportWrongIngredients extends StatelessWidget {
+  const ReportWrongIngredients({
     Key? key,
   }) : super(key: key);
 
@@ -14,8 +13,8 @@ class ReportWrongImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          left: 30,
           right: 30,
+          left: 30,
           bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -33,25 +32,21 @@ class ReportWrongImage extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Product image:',
+              'Ingredients:',
               style: bodyMedium(),
             ),
           ),
           const SizedBox(height: 10),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: CustomColor.lightBackColor),
-            ),
-            height: 200,
-            child: Center(
-              child: IconButton(
-                icon: const Icon(
-                  CupertinoIcons.photo_camera_solid,
-                  size: 40,
-                ),
-                onPressed: () {},
+          TextField(
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: CustomColor.lightBackColor),
+                borderRadius: BorderRadius.circular(10),
               ),
+              hintText: 'Type ingredients here',
+              hintStyle: bodyMedium().copyWith(fontSize: 14),
             ),
           ),
           const SizedBox(height: 10),
@@ -62,6 +57,7 @@ class ReportWrongImage extends StatelessWidget {
           const SizedBox(height: 10),
           CustomElevatedButton(
             text: 'Send',
+            height: 45,
             onTap: () {},
           ),
           const SizedBox(height: 20)

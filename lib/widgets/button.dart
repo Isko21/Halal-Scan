@@ -5,11 +5,13 @@ import '../utility/common_functions.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final String text;
-  final Function onTap;
+  final VoidCallback onTap;
+  final double height;
   const CustomElevatedButton({
     Key? key,
     required this.text,
     required this.onTap,
+    required this.height,
   }) : super(key: key);
 
   @override
@@ -17,10 +19,10 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          minimumSize: Size(MediaQuery.of(context).size.width - 60, 45),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          minimumSize: Size(MediaQuery.of(context).size.width, height),
           backgroundColor: CustomColor.buttonColor),
-      onPressed: () => onTap,
+      onPressed:  onTap,
       child: Text(
         text,
         style: bodyMedium().copyWith(fontSize: 18, color: Colors.white),
