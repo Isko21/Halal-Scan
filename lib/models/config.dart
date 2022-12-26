@@ -2,9 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:halal_scan/pages/main/place_page.dart';
 import 'package:halal_scan/pages/main/search_page.dart';
-import 'package:halal_scan/pages/onboarding/choose_role.dart';
-import 'package:halal_scan/pages/onboarding/create_user.dart';
-import 'package:halal_scan/pages/onboarding/halal_info.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
