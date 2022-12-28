@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halal_scan/utility/auth.dart';
 import 'package:halal_scan/utility/common_functions.dart';
 import 'package:halal_scan/widgets/button.dart';
 import 'package:roundcheckbox/roundcheckbox.dart';
@@ -16,7 +17,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  // final _authService = AuthService();
+  final authService = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +66,6 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
               const SizedBox(height: 10),
-
               Text('Password',
                   style: bodyMedium().copyWith(fontWeight: FontWeight.bold)),
               const SizedBox(height: 10),
@@ -83,7 +83,13 @@ class _SignInPageState extends State<SignInPage> {
                 ),
               ),
               const SizedBox(height: 35),
-              CustomElevatedButton(text: 'Sign In', height: 55, onTap: () {}),
+              CustomElevatedButton(
+                  text: 'Sign In',
+                  height: 55,
+                  onTap: () {
+                    authService.signIn(emailController.text.trim(),
+                        passwordController.text.trim());
+                  }),
               const SizedBox(height: 5),
               Row(
                 children: [
@@ -128,16 +134,6 @@ class _SignInPageState extends State<SignInPage> {
                       child: Text('Sign Up', style: bodyMedium()))
                 ],
               ),
-
-              // Center(
-              //   child: ElevatedButton(
-              //     child: const Text('Sign In'),
-              //     onPressed: () => Provider.of<GoogleSignInProvider>(
-              //       context,
-              //       listen: false,
-              //     ).googleLogIn(),
-              //   ),
-              // ),
             ],
           ),
         ),

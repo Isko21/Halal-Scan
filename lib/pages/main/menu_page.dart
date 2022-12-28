@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:halal_scan/models/config.dart';
+import 'package:halal_scan/utility/auth.dart';
 import 'package:halal_scan/utility/common_functions.dart';
 import 'package:halal_scan/widgets/appbar.dart';
 
@@ -12,6 +13,7 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
+  final authService = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -173,6 +175,21 @@ class _MenuPageState extends State<MenuPage> {
                           thumbColor: Colors.white,
                           value: true,
                           onChanged: (val) {},
+                        ),
+                      ),
+                      ListTile(
+                        onTap: authService.signOut,
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 20),
+                        leading: Text(
+                          'Log out',
+                          style: bodyLarge()
+                              .copyWith(fontWeight: FontWeight.normal),
+                        ),
+                        trailing: Icon(
+                          Icons.arrow_forward_ios,
+                          color: CustomColor.darkBackColor,
+                          size: 20,
                         ),
                       ),
                       const SizedBox(height: 10),
