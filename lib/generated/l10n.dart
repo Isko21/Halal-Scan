@@ -51,50 +51,60 @@ class S {
   }
 
   /// `Menu`
-  String get nav_bar_menu {
+  String get menu {
     return Intl.message(
       'Menu',
-      name: 'nav_bar_menu',
+      name: 'menu',
       desc: '',
       args: [],
     );
   }
 
   /// `Scan`
-  String get nav_bar_scan {
+  String get scan {
     return Intl.message(
       'Scan',
-      name: 'nav_bar_scan',
+      name: 'scan',
       desc: '',
       args: [],
     );
   }
 
   /// `Search`
-  String get nav_bar_search {
+  String get search {
     return Intl.message(
       'Search',
-      name: 'nav_bar_search',
+      name: 'search',
       desc: '',
       args: [],
     );
   }
 
   /// `Save`
-  String get nav_bar_save {
+  String get save {
     return Intl.message(
       'Save',
-      name: 'nav_bar_save',
+      name: 'save',
       desc: '',
       args: [],
     );
   }
 
   /// `Home`
-  String get nav_bar_home {
+  String get home {
     return Intl.message(
       'Home',
-      name: 'nav_bar_home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Places`
+  String get place {
+    return Intl.message(
+      'Places',
+      name: 'place',
       desc: '',
       args: [],
     );
