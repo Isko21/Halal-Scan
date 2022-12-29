@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:halal_scan/models/user.dart';
 
 import 'choose_role.dart';
 import 'create_user.dart';
@@ -13,6 +14,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final PageController pageController = PageController();
+  CustomUser user = CustomUser();
   @override
   void dispose() {
     pageController.dispose();
@@ -21,25 +23,29 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      controller: pageController,
-      itemCount: 3,
-      itemBuilder: (context, i) {
-        switch (i) {
-          case 0:
-            return CreateUserView(onNextClicked: () => nextPage());
+    return Scaffold(
+      body: PageView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        controller: pageController,
+        itemCount: 3,
+        itemBuilder: (context, i) {
+          switch (i) {
+            case 0:
+              return CreateUserView(
+                  currentUser: user, onNextClicked: () => nextPage());
 
-          case 1:
-            return ChooseRoleView(onNextClicked: () => nextPage());
+            case 1:
+              return ChooseRoleView(
+                  currentUser: user, onNextClicked: () => nextPage());
 
-          case 2:
-            return HalalInfoView(onNextClicked: () => nextPage());
-        }
-        return ChooseRoleView(
-          onNextClicked: () => nextPage(),
-        );
-      },
+            case 2:
+              return HalalInfoView(
+                  currentUser: user, onNextClicked: () => nextPage());
+          }
+          return ChooseRoleView(
+              currentUser: user, onNextClicked: () => nextPage());
+        },
+      ),
     );
   }
 

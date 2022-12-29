@@ -4,6 +4,9 @@ import 'package:halal_scan/models/config.dart';
 import 'package:halal_scan/utility/auth.dart';
 import 'package:halal_scan/utility/common_functions.dart';
 import 'package:halal_scan/widgets/appbar.dart';
+import 'package:provider/provider.dart';
+
+import '../../models/user.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -16,6 +19,8 @@ class _MenuPageState extends State<MenuPage> {
   final authService = AuthService();
   @override
   Widget build(BuildContext context) {
+    final currentUser = Provider.of<CustomUser?>(context);
+
     return Scaffold(
       appBar: const MainAppBar(
         title: 'MENU',
@@ -28,25 +33,22 @@ class _MenuPageState extends State<MenuPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                CircleAvatar(
-                  radius: 50,
-                  child: Center(
-                    child: Text(
-                      '😁',
-                      style: titleLarge(),
-                    ),
-                  ),
-                ),
+                const CircleAvatar(
+                    radius: 50,
+                    child: Image(
+                      image: NetworkImage(
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8sz484NbeS21UH8wlx9yDd0WROQsCMpS-mvXjkmY&s'),
+                    )),
                 const SizedBox(height: 10),
                 Center(
                   child: Text(
-                    'Iskhak Suranov',
+                    currentUser!.fullName!,
                     style: titleMedium(),
                   ),
                 ),
                 Center(
                   child: Text(
-                    'iskhaksuranov@gmail.com',
+                    currentUser.email!,
                     style: bodyMedium(),
                   ),
                 ),

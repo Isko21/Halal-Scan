@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:halal_scan/models/product.dart';
+import 'package:halal_scan/utility/auth.dart';
 
 import '../../models/config.dart';
+import '../../models/user.dart';
 import '../../utility/common_functions.dart';
 import '../../utility/stepper.dart';
 import '../../widgets/button.dart';
 
 class HalalInfoView extends StatefulWidget {
   final Function() onNextClicked;
-  const HalalInfoView({required this.onNextClicked, super.key});
+  CustomUser currentUser;
+  HalalInfoView(
+      {required this.currentUser, required this.onNextClicked, super.key});
 
   @override
   State<HalalInfoView> createState() => _HalalInfoViewState();
 }
 
 class _HalalInfoViewState extends State<HalalInfoView> {
+  final authService = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +68,9 @@ class _HalalInfoViewState extends State<HalalInfoView> {
         padding: const EdgeInsets.only(left: 30, right: 30, bottom: 25),
         child: CustomElevatedButton(
             text: 'Next',
-            onTap: () {
+            onTap: () async {
+              await authService.signUp(
+                  widget.currentUser.email!, widget.currentUser.password!);
               widget.onNextClicked();
             },
             height: 55),

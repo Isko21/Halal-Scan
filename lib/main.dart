@@ -28,8 +28,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     return StreamProvider<CustomUser?>.value(
-      initialData:
-          CustomUser(fullName: 'Initial Data', email: 'test@gmail.com'),
+      initialData: CustomUser(),
       value: AuthService().authUser,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

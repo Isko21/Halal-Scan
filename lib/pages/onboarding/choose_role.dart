@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:halal_scan/models/user.dart';
 import 'package:halal_scan/widgets/button.dart';
 import 'package:roundcheckbox/roundcheckbox.dart';
 
@@ -8,7 +9,9 @@ import '../../utility/stepper.dart';
 
 class ChooseRoleView extends StatefulWidget {
   final Function() onNextClicked;
-  const ChooseRoleView({required this.onNextClicked, super.key});
+  CustomUser currentUser;
+  ChooseRoleView(
+      {required this.currentUser, required this.onNextClicked, super.key});
 
   @override
   State<ChooseRoleView> createState() => _ChooseRoleViewState();
@@ -48,7 +51,12 @@ class _ChooseRoleViewState extends State<ChooseRoleView> {
                 description:
                     'You are helping the community scan and review more products.',
                 isChecked: isChecked,
-                onPressed: () => setState(() => isChecked = !isChecked),
+                onPressed: () => setState(() {
+                  isChecked = !isChecked;
+                  isChecked == true
+                      ? print('this is scanner')
+                      : print('this is reviewer');
+                }),
               ),
               const SizedBox(height: 20),
               HalalInfoTile(
@@ -56,8 +64,14 @@ class _ChooseRoleViewState extends State<ChooseRoleView> {
                 description:
                     'You must know all the rules for reviewing goods and have a halal education.',
                 isChecked: !isChecked,
-                onPressed: () => setState(() => isChecked = !isChecked),
+                onPressed: () => setState(() {
+                  isChecked = !isChecked;
+                  isChecked == false
+                      ? print('this is reviewer')
+                      : print('this is scanner');
+                }),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -67,6 +81,7 @@ class _ChooseRoleViewState extends State<ChooseRoleView> {
         child: CustomElevatedButton(
             text: 'Next',
             onTap: () {
+              widget.currentUser.isReviewer = !isChecked;
               widget.onNextClicked();
             },
             height: 55),

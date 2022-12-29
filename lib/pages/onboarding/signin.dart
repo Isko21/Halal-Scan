@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:halal_scan/pages/onboarding/create_user.dart';
+import 'package:halal_scan/pages/onboarding/signup.dart';
 import 'package:halal_scan/utility/auth.dart';
 import 'package:halal_scan/utility/common_functions.dart';
 import 'package:halal_scan/widgets/button.dart';
@@ -18,6 +20,8 @@ class _SignInPageState extends State<SignInPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final authService = AuthService();
+  final GlobalKey<FormState> key = GlobalKey<FormState>();
+  String error = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,100 +45,143 @@ class _SignInPageState extends State<SignInPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Welcome \nback!',
-                style: titleLarge().copyWith(fontSize: 40, color: Colors.black),
-              ),
-              const SizedBox(height: 20),
-              Text('Email address',
-                  style: bodyMedium().copyWith(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 10),
-              TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  fillColor: CustomColor.veryLightBackColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: CustomColor.darkBackColor,
-                      width: 1,
+          child: Form(
+            key: key,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Welcome \nback!',
+                  style:
+                      titleLarge().copyWith(fontSize: 40, color: Colors.black),
+                ),
+                const SizedBox(height: 20),
+                Text('Email address',
+                    style: bodyMedium().copyWith(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                TextFormField(
+                  validator: validateEmail,
+                  controller: emailController,
+                  onChanged: (value) {
+                    setState(() {
+                      error = "";
+                    });
+                  },
+                  decoration: InputDecoration(
+                    fillColor: CustomColor.veryLightBackColor,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        color: CustomColor.darkBackColor,
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Text('Password',
-                  style: bodyMedium().copyWith(fontWeight: FontWeight.bold)),
-              const SizedBox(height: 10),
-              TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  fillColor: CustomColor.veryLightBackColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: CustomColor.darkBackColor,
-                      width: 1,
+                const SizedBox(height: 10),
+                Text('Password',
+                    style: bodyMedium().copyWith(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                TextFormField(
+                  validator: validatePassword,
+                  onChanged: (value) {
+                    setState(() {
+                      error = "";
+                    });
+                  },
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    fillColor: CustomColor.veryLightBackColor,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        color: CustomColor.darkBackColor,
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 35),
-              CustomElevatedButton(
-                  text: 'Sign In',
-                  height: 55,
-                  onTap: () {
-                    authService.signIn(emailController.text.trim(),
-                        passwordController.text.trim());
-                  }),
-              const SizedBox(height: 5),
-              Row(
-                children: [
-                  Row(
+                Center(
+                  child: Column(
                     children: [
-                      SizedBox(
-                        height: 25,
-                        width: 25,
-                        child: RoundCheckBox(
-                          isChecked: true,
-                          borderColor: CustomColor.buttonColor,
-                          checkedColor: CustomColor.buttonColor,
-                          onTap: (selected) {},
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        'Remember me',
-                        style: bodyMedium().copyWith(color: Colors.black),
-                      ),
+                      const SizedBox(height: 20),
+                      Visibility(
+                          visible: error.isNotEmpty,
+                          child: Text(
+                            error,
+                            style: bodyMedium().copyWith(color: Colors.red),
+                          )),
                     ],
                   ),
-                  const Spacer(),
-                  TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Forgot Password?',
-                        style: bodyMedium(),
-                      ))
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Do not have an account?',
-                    style: bodyMedium(),
-                  ),
-                  TextButton(
-                      onPressed: () {},
-                      child: Text('Sign Up', style: bodyMedium()))
-                ],
-              ),
-            ],
+                ),
+                SizedBox(height: error.isEmpty ? 35 : 20),
+                CustomElevatedButton(
+                  text: 'Sign In',
+                  height: 55,
+                  onTap: () async {
+                    if (key.currentState!.validate()) {
+                      dynamic result = await authService.signIn(
+                          emailController.text.trim(),
+                          passwordController.text.trim());
+                      if (result == 'user-not-found') {
+                        error = 'Wrong email or user not found.';
+                      } else if (result == 'wrong-password') {
+                        error = 'Wrong password. Please try again';
+                      }
+                    }
+                    setState(() {});
+                  },
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 25,
+                          width: 25,
+                          child: RoundCheckBox(
+                            isChecked: true,
+                            borderColor: CustomColor.buttonColor,
+                            checkedColor: CustomColor.buttonColor,
+                            onTap: (selected) {},
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          'Remember me',
+                          style: bodyMedium().copyWith(color: Colors.black),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Forgot Password?',
+                          style: bodyMedium(),
+                        ))
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Do not have an account?',
+                      style: bodyMedium(),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => const SignUpPage()));
+                        },
+                        child: Text('Sign Up', style: bodyMedium()))
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

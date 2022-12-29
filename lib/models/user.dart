@@ -4,6 +4,7 @@ class CustomUser {
   String? uid;
   String? fullName;
   String? email;
+  String? password;
   String? photoUrl;
   bool? isReviewer;
   Timestamp? memberSince;
@@ -12,21 +13,12 @@ class CustomUser {
     this.uid,
     this.fullName,
     this.email,
-    this.photoUrl,
+    this.password,
+    this.photoUrl =
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8sz484NbeS21UH8wlx9yDd0WROQsCMpS-mvXjkmY&s',
     this.isReviewer = false,
     this.memberSince,
   });
-
-  String? get getUID => uid;
-  String? get getFullName => fullName;
-  String? get getEmail => email;
-  String? get getPhotoUrl => photoUrl;
-  bool? get getIsReviewer => isReviewer;
-  Timestamp? get getTimeStamp => memberSince;
-
-  void setFullName(String val) {
-    fullName = val;
-  }
 
   Map<String, dynamic> toJson() => {
         'uid': uid,
@@ -42,3 +34,5 @@ class CustomUser {
       isReviewer: json['isReviewer'],
       memberSince: json['memberSince']);
 }
+
+enum CustomRole { scanner, reviewer }

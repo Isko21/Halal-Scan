@@ -3,13 +3,16 @@ import 'package:halal_scan/pages/onboarding/signin.dart';
 import 'package:halal_scan/utility/auth.dart';
 
 import '../../models/config.dart';
+import '../../models/user.dart';
 import '../../utility/common_functions.dart';
 import '../../utility/stepper.dart';
 import '../../widgets/button.dart';
 
 class CreateUserView extends StatefulWidget {
   final Function() onNextClicked;
-  const CreateUserView({required this.onNextClicked, super.key});
+  CustomUser currentUser;
+  CreateUserView(
+      {required this.currentUser, required this.onNextClicked, super.key});
 
   @override
   State<CreateUserView> createState() => _CreateUserViewState();
@@ -157,15 +160,19 @@ class _CreateUserViewState extends State<CreateUserView> with ChangeNotifier {
               CustomElevatedButton(
                   text: 'Next',
                   onTap: () async {
+                    FocusScope.of(context).unfocus();
+
                     if (key.currentState!.validate() &&
                         validateBothPasswords(
                             password.text, confirmPassword.text)) {
-                      await authService.signUp(
-                          emailAddress.text, password.text);
+                      widget.currentUser.fullName = fullName.text.trim();
+                      widget.currentUser.email = emailAddress.text.trim();
+                      widget.currentUser.password = password.text;
+                      // await authService.signUp(
+                      //     emailAddress.text, password.text);
                       widget.onNextClicked();
                       print('wszystko dobra');
                     }
-                    FocusScope.of(context).unfocus();
                   },
                   height: 55),
               const SizedBox(height: 10),
@@ -215,13 +222,8 @@ String? validatePassword(String? password) {
   if (password == null || password.isEmpty) {
     return 'Password is required.';
   }
-  String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$';
-  RegExp regex = RegExp(pattern);
-  if (!regex.hasMatch(password)) {
-    return '''
-      Password must be at least 8 characters,
-      include an uppercase letter and number.
-      ''';
+  if (password.length < 8) {
+    return 'Password must be at least 8 characters';
   }
 
   return null;

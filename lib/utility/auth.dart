@@ -10,7 +10,8 @@ class AuthService extends ChangeNotifier {
         ? CustomUser(
             uid: user.uid,
             fullName: user.displayName,
-            photoUrl: user.photoURL,
+            photoUrl:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8sz484NbeS21UH8wlx9yDd0WROQsCMpS-mvXjkmY&s',
             email: user.email,
           )
         : null;
@@ -27,9 +28,14 @@ class AuthService extends ChangeNotifier {
       User? user = userCredential.user;
 
       return customUserFromFirebase(user);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
     } catch (e) {
-      print(e.toString());
-      return null;
+      print(e);
     }
   }
 
@@ -41,11 +47,9 @@ class AuthService extends ChangeNotifier {
       return customUserFromFirebase(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-        return null;  
+        return e.code;
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-        return null;
+        return e.code;
       }
     }
   }
