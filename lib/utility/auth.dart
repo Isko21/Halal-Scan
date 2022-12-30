@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:halal_scan/models/user.dart';
@@ -5,20 +6,25 @@ import 'package:halal_scan/models/user.dart';
 class AuthService extends ChangeNotifier {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  CustomUser? customUserFromFirebase(User? user) {
+  CustomUser? customUserFromFirebase({User? user, CustomUser? customUser}) {
     return user != null
         ? CustomUser(
             uid: user.uid,
-            fullName: user.displayName,
+            email: user.email,
+            fullName: customUser?.fullName,
+            password: customUser?.password,
+            isReviewer: customUser?.isReviewer,
             photoUrl:
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8sz484NbeS21UH8wlx9yDd0WROQsCMpS-mvXjkmY&s',
-            email: user.email,
+            memberSince: Timestamp.now(),
           )
         : null;
   }
 
   Stream<CustomUser?> get authUser {
-    return firebaseAuth.authStateChanges().map(customUserFromFirebase);
+    return firebaseAuth
+        .authStateChanges()
+        .map((event) => customUserFromFirebase(user: event));
   }
 
   Future signUp(String email, String password) async {
@@ -27,7 +33,7 @@ class AuthService extends ChangeNotifier {
           .createUserWithEmailAndPassword(email: email, password: password);
       User? user = userCredential.user;
 
-      return customUserFromFirebase(user);
+      return customUserFromFirebase(user: user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -44,7 +50,7 @@ class AuthService extends ChangeNotifier {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       User? user = credential.user;
-      return customUserFromFirebase(user);
+      return customUserFromFirebase(user: user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return e.code;
