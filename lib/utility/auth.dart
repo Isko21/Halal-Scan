@@ -9,13 +9,13 @@ class AuthService extends ChangeNotifier {
   CustomUser? customUserFromFirebase({User? user, CustomUser? customUser}) {
     print(user.toString());
     print(customUser.toString());
-    return (user != null && customUser != null)
+    return (user != null)
         ? CustomUser(
             uid: user.uid,
             email: user.email,
-            fullName: customUser.fullName,
-            password: customUser.password,
-            isReviewer: customUser.isReviewer,
+            fullName: customUser?.fullName,
+            password: customUser?.password,
+            isReviewer: customUser?.isReviewer,
             photoUrl:
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8sz484NbeS21UH8wlx9yDd0WROQsCMpS-mvXjkmY&s',
             memberSince: Timestamp.fromDate(DateTime.now()),
