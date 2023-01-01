@@ -33,6 +33,8 @@ class CustomUser {
       photoUrl: json['photoUrl'],
       isReviewer: json['isReviewer'],
       memberSince: json['memberSince']);
-}
 
-enum CustomRole { scanner, reviewer }
+  @override
+  String toString() =>
+      'uid: $uid, fullName" $fullName, email: $email, password: $password, photoUrl: $photoUrl, isReviewer: $isReviewer, memberSince: $memberSince';
+}

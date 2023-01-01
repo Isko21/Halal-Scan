@@ -69,9 +69,8 @@ class _HalalInfoViewState extends State<HalalInfoView> {
         child: CustomElevatedButton(
             text: 'Next',
             onTap: () async {
-              authService.customUserFromFirebase(customUser: widget.currentUser);
-              await authService.signUp(
-                  widget.currentUser.email!, widget.currentUser.password!);
+              await authService.signUp(widget.currentUser.email!,
+                  widget.currentUser.password!, widget.currentUser);
               widget.onNextClicked();
             },
             height: 55),

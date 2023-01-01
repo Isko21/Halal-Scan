@@ -42,7 +42,9 @@ class _MenuPageState extends State<MenuPage> {
                 const SizedBox(height: 10),
                 Center(
                   child: Text(
-                    currentUser!.fullName!,
+                    currentUser!.fullName != null
+                        ? currentUser.fullName!
+                        : 'Null',
                     style: titleMedium(),
                   ),
                 ),
@@ -74,6 +76,10 @@ class _MenuPageState extends State<MenuPage> {
                           style: bodyLarge()
                               .copyWith(fontWeight: FontWeight.normal),
                         ),
+                        onTap: () {
+                          print('myna bashtaldy');
+                          print(currentUser.toString());
+                        },
                         trailing: Icon(
                           Icons.arrow_forward_ios,
                           color: CustomColor.darkBackColor,
