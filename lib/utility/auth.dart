@@ -6,13 +6,19 @@ import 'package:halal_scan/models/user.dart';
 class AuthService extends ChangeNotifier {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  CustomUser? customUserFromFirebase({User? user}) {
+  CustomUser? customUserFromFirebase(User? user) {
     if (user != null) {
+      print('user is not null');
       checkIfDocExists(user.uid).then((value) {
+        print('we have checked if doc exists');
         if (value) {
+          print('doc exists is true');
           final doc =
               FirebaseFirestore.instance.collection('users').doc(user.uid);
           doc.get().then((document) {
+            print('we are returning a value');
+            final data = document.data();
+            print(data!['isReviewer']);
             return CustomUser.fromJson(document.data()!);
           });
         }
@@ -22,9 +28,8 @@ class AuthService extends ChangeNotifier {
   }
 
   Stream<CustomUser?> get authUser {
-    return firebaseAuth
-        .authStateChanges()
-        .map((event) => customUserFromFirebase(user: event));
+    print('rebuilded');
+    return firebaseAuth.authStateChanges().map(customUserFromFirebase);
   }
 
   Future signUp(String email, String password, CustomUser customUser) async {
@@ -33,7 +38,7 @@ class AuthService extends ChangeNotifier {
           .createUserWithEmailAndPassword(email: email, password: password);
       User? user = userCredential.user;
 
-      return customUserFromFirebase(user: user);
+      return customUserFromFirebase(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -50,7 +55,7 @@ class AuthService extends ChangeNotifier {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       User? user = credential.user;
-      return customUserFromFirebase(user: user);
+      return customUserFromFirebase(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return e.code;

@@ -20,7 +20,6 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     final currentUser = Provider.of<CustomUser?>(context);
-
     return Scaffold(
       appBar: const MainAppBar(
         title: 'MENU',
@@ -33,16 +32,15 @@ class _MenuPageState extends State<MenuPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                     radius: 50,
                     child: Image(
-                      image: NetworkImage(
-                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8sz484NbeS21UH8wlx9yDd0WROQsCMpS-mvXjkmY&s'),
+                      image: NetworkImage(currentUser!.photoUrl!),
                     )),
                 const SizedBox(height: 10),
                 Center(
                   child: Text(
-                    currentUser!.fullName != null
+                    currentUser.fullName != null
                         ? currentUser.fullName!
                         : 'Null',
                     style: titleMedium(),

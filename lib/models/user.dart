@@ -25,7 +25,7 @@ class CustomUser {
         'fullName': fullName,
         'photoUrl': photoUrl,
         'isReviewer': isReviewer,
-        'reviewedAt': memberSince,
+        'memberSince': memberSince,
       };
   static CustomUser fromJson(Map<String, dynamic> json) => CustomUser(
       uid: json['uid'],
