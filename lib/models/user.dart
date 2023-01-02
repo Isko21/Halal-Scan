@@ -31,7 +31,7 @@ class CustomUser {
       uid: json['uid'],
       fullName: json['fullName'],
       photoUrl: json['photoUrl'],
-      isReviewer: json['isReviewer'],
+      isReviewer: json['isReviewer'] as bool,
       memberSince: json['memberSince']);
 
   @override
