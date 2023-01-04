@@ -168,8 +168,6 @@ class _CreateUserViewState extends State<CreateUserView> with ChangeNotifier {
                       widget.currentUser.fullName = fullName.text.trim();
                       widget.currentUser.email = emailAddress.text.trim();
                       widget.currentUser.password = password.text;
-                      // await authService.signUp(
-                      //     emailAddress.text, password.text);
                       widget.onNextClicked();
                       print('wszystko dobra');
                     }

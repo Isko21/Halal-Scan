@@ -8,21 +8,7 @@ class AuthService extends ChangeNotifier {
 
   CustomUser? customUserFromFirebase(User? user) {
     if (user != null) {
-      print('user is not null');
-      checkIfDocExists(user.uid).then((value) {
-        print('we have checked if doc exists');
-        if (value) {
-          print('doc exists is true');
-          final doc =
-              FirebaseFirestore.instance.collection('users').doc(user.uid);
-          doc.get().then((document) {
-            print('we are returning a value');
-            final data = document.data();
-            print(data!['isReviewer']);
-            return CustomUser.fromJson(document.data()!);
-          });
-        }
-      });
+      return CustomUser(email: user.email, uid: user.uid);
     }
     return null;
   }
@@ -37,7 +23,15 @@ class AuthService extends ChangeNotifier {
       UserCredential userCredential = await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       User? user = userCredential.user;
-
+      customUser.uid = user!.uid;
+      customUser.email = user.email;
+      customUser.memberSince = Timestamp.fromDate(DateTime.now());
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .set(customUser.toJson())
+          .then((value) => print("success"))
+          .catchError((error) => print("error: $error"));
       return customUserFromFirebase(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -54,8 +48,8 @@ class AuthService extends ChangeNotifier {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      User? user = credential.user;
-      return customUserFromFirebase(user);
+      notifyListeners();
+      return customUserFromFirebase(credential.user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return e.code;
@@ -74,7 +68,7 @@ class AuthService extends ChangeNotifier {
     }
   }
 
-  Future<bool> checkIfDocExists(String docId) async {
+  static Future<bool> checkIfDocExists(String docId) async {
     try {
       var collectionRef = FirebaseFirestore.instance.collection('users');
 
