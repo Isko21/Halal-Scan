@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halal_scan/pages/onboarding/create_user.dart';
+import 'package:halal_scan/pages/onboarding/signup.dart';
 import 'package:halal_scan/utility/auth.dart';
 import 'package:halal_scan/utility/common_functions.dart';
 import 'package:halal_scan/widgets/button.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:roundcheckbox/roundcheckbox.dart';
 
 import '../../models/config.dart';
@@ -173,10 +176,13 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        print(isSignIn);
-                        isSignIn = !isSignIn;
-                        print(isSignIn);
-                        setState(() {});
+                        PersistentNavBarNavigator.pushDynamicScreen(
+                          context,
+                          screen: CupertinoPageRoute(
+                            builder: (context) => const SignUpPage(),
+                          ),
+                          withNavBar: false,
+                        );
                       },
                       child: Text(
                         'Sign Up',
