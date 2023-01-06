@@ -9,6 +9,8 @@ import '../pages/main/home_page.dart';
 import '../pages/main/menu_page.dart';
 import '../pages/main/scan_page.dart';
 
+bool isSignIn = true;
+
 List<PersistentBottomNavBarItem> navBarsItems() {
   return [
     PersistentBottomNavBarItem(
