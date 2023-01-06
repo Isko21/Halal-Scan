@@ -57,7 +57,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     try {
       final user = FirebaseAuth.instance.currentUser!;
       print('sending verification code');
-
+      print(user.email);
       await user.sendEmailVerification();
     } catch (e) {
       print(e);

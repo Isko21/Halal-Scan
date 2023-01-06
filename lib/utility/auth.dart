@@ -25,6 +25,7 @@ class AuthService extends ChangeNotifier {
       User? user = userCredential.user;
       customUser.uid = user!.uid;
       customUser.email = user.email;
+      customUser.photoUrl = 'https://robohash.org/${user.uid}';
       customUser.memberSince = Timestamp.fromDate(DateTime.now());
       FirebaseFirestore.instance
           .collection('users')

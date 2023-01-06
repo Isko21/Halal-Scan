@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:halal_scan/pages/onboarding/signin.dart';
 import 'package:halal_scan/utility/auth.dart';
 
 import '../../models/config.dart';
@@ -183,8 +182,9 @@ class _CreateUserViewState extends State<CreateUserView> with ChangeNotifier {
                   ),
                   TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => const SignInPage()));
+                        isSignIn = !isSignIn;
+
+                        setState(() {});
                       },
                       child: Text('Sign In', style: bodyMedium()))
                 ],

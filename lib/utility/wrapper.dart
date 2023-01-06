@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:halal_scan/main.dart';
 import 'package:halal_scan/models/user.dart';
+import 'package:halal_scan/pages/onboarding/signin.dart';
 import 'package:halal_scan/pages/onboarding/signup.dart';
 import 'package:halal_scan/utility/auth.dart';
 import 'package:provider/provider.dart';
+
+import '../models/config.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
@@ -34,6 +37,6 @@ class Wrapper extends StatelessWidget {
       });
       return const MainPage();
     }
-    return const SignUpPage();
+    return isSignIn ? const SignInPage() : const SignUpPage();
   }
 }

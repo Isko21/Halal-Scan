@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halal_scan/pages/onboarding/create_user.dart';
-import 'package:halal_scan/pages/onboarding/signup.dart';
 import 'package:halal_scan/utility/auth.dart';
 import 'package:halal_scan/utility/common_functions.dart';
 import 'package:halal_scan/widgets/button.dart';
@@ -123,6 +122,7 @@ class _SignInPageState extends State<SignInPage> {
                       dynamic result = await authService.signIn(
                           emailController.text.trim(),
                           passwordController.text.trim());
+                      print(result);
                       if (result == 'user-not-found') {
                         error = 'Wrong email or user not found.';
                       } else if (result == 'wrong-password') {
@@ -172,12 +172,17 @@ class _SignInPageState extends State<SignInPage> {
                       style: bodyMedium(),
                     ),
                     TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => const SignUpPage()));
-                        },
-                        child: Text('Sign Up', style: bodyMedium()))
+                      onPressed: () {
+                        print(isSignIn);
+                        isSignIn = !isSignIn;
+                        print(isSignIn);
+                        setState(() {});
+                      },
+                      child: Text(
+                        'Sign Up',
+                        style: bodyMedium(),
+                      ),
+                    )
                   ],
                 ),
               ],
