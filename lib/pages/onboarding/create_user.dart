@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:halal_scan/pages/onboarding/signin.dart';
 import 'package:halal_scan/utility/auth.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../models/config.dart';
 import '../../models/user.dart';
@@ -182,9 +185,13 @@ class _CreateUserViewState extends State<CreateUserView> with ChangeNotifier {
                   ),
                   TextButton(
                       onPressed: () {
-                        isSignIn = !isSignIn;
-
-                        setState(() {});
+                        PersistentNavBarNavigator.pushDynamicScreen(
+                          context,
+                          screen: CupertinoPageRoute(
+                            builder: (context) => const SignInPage(),
+                          ),
+                          withNavBar: false,
+                        );
                       },
                       child: Text('Sign In', style: bodyMedium()))
                 ],
