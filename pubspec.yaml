@@ -8,9 +8,11 @@ environment:
 
 dependencies:
   auto_size_text: ^3.0.0
+  card_swiper: ^2.0.4
   cloud_firestore: ^4.0.5
   cupertino_icons: ^1.0.2
   device_preview: ^1.1.0
+  firebase_app_check: ^0.1.1+8
   firebase_auth: ^4.0.1
   firebase_core: ^2.1.1
   firebase_storage: ^11.0.3
