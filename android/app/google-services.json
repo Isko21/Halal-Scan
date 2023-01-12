@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "957559533289",
+    "firebase_url": "https://halal-scan-91706-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "halal-scan-91706",
     "storage_bucket": "halal-scan-91706.appspot.com"
   },
@@ -14,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "957559533289-ra010okeosmlhnusocgr7bab5tacarku.apps.googleusercontent.com",
+          "client_id": "957559533289-fosjfril92a5iiamprsj6dvmnlv250jc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "io.isko.halal_scan",

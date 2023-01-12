@@ -1,11 +1,10 @@
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:halal_scan/models/user.dart';
-import 'package:halal_scan/utility/wrapper.dart';
+import 'package:halal_scan/pages/onboarding/splash_screen.dart';
 import 'package:halal_scan/models/config.dart';
 import 'package:material_color_generator/material_color_generator.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -18,8 +17,6 @@ import 'utility/auth.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAppCheck.instance.activate();
-
   runApp(const MyApp());
 }
 
@@ -45,13 +42,13 @@ class MyApp extends StatelessWidget {
         supportedLocales: S.delegate.supportedLocales,
         theme: ThemeData(
           primarySwatch: generateMaterialColor(color: CustomColor.buttonColor),
-          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context)
-              .textTheme
-              .apply(
-                  bodyColor: CustomColor.darkBackColor,
-                  displayColor: CustomColor.darkBackColor)),
+          textTheme: GoogleFonts.poppinsTextTheme(
+            Theme.of(context).textTheme.apply(
+                bodyColor: CustomColor.darkBackColor,
+                displayColor: CustomColor.darkBackColor),
+          ),
         ),
-        home: const Wrapper(),
+        home: const SplashScreen(),
       ),
     );
   }
